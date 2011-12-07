@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export RAILS_ENV=<%= @rails_env %>
+
+exec ruby /data/<%= @app_name %>/current/app/daemons/stats_watcher.rb 2>&1
+                                           
