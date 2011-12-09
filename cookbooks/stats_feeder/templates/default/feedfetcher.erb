@@ -1,0 +1,483 @@
+# Configuration file for FeedFetcher Deluxe
+
+# Copyright (c) 2008 XML Team Solutions, Inc.
+
+# -----------------------------------------------------------------------------------------------------
+# Command Line Options for software 
+# -----------------------------------------------------------------------------------------------------
+
+#	How to Call FeedFetcher:
+#
+#		1) Change directories into your "perl" directory. 
+#				Linux example: 		cd /opt/FeedFetcherDeluxe/perl
+#				Windows example: 	cd c:\FeedFetcherDeluxe\perl
+#
+#		2) Call "ff" -- examples below are later referred to as {ff-call}:
+#         NOTE: -I{path to FeedFetcher's perl directory} indicates an extra perl argument consisting of a dash then capital 'i' and
+#         the full path to FeedFetcher's perl directory. 
+#         e.g. /opt/FeedFetcher/Deluxe/perl or C:\FeedFetcherDeluxe\perl
+
+#				Linux example for compiled FeedFetcher:		Feedfetcher/ff
+#				Linux example for uncompiled FeedFetcher:	perl -I{path to FeedFetcher's perl directory} Feedfetcher/ff.pl
+#				Windows example for compiled FeedFetcher:	Feedfetcher\ff.exe
+#				Windows example for uncompiled FeedFetcher:	perl -I{path to FeedFetcher's perl directory} Feedfetcher\ff.pl
+#
+#		3) Use the appropriate command-line flags:
+#
+#		-p used for PRINTING the log to the command window
+#		-i means IGNORE the last_update behavior when loading game subscores, etc., for FeedFetcher Deluxe
+#		-t used for running ff just one TIME (as opposed to every [Interval] minutes)
+#		-a used for retrieving ALL content, even content pulled previously
+#		-S VALUE used to specify a particular [Since] value on the command line, instead of below
+#			 (Note: Uses a Captial S, not lower-case like below.)
+#		-s used to ignore last-accessed time and instead get all content SINCE some time interval ago;
+#			(Gets content from the last x minutes defined by the [Since] param)
+#		-w used for running ff WITHOUT throttling (will ignore Stop_threshold)
+#			(Throttling prevents too many documents from being downloaded
+#			by FeedFetcher at once.)
+#		-c CONFIG_FILE reads from a named feedfetcher.cfg file, rather than /conf/feedfetcher.cfg
+#			(leave the .cfg extension part off of the command-line, as in: -c alternate-config
+#			in order to use conf/alternate-config.cfg)
+#		-l used to load LOCAL content, as defined by [Source_dir]
+#		-k used along with -l for loading local content. Means: KEEP files there after loading
+#			(as opposed to the usual behavior of deleting them)
+#		-R used to write out incoming files into a RAW working directory, specified in Raw_dir
+#		-L VALUE used to specify the number of most recent documents to pull, when using an alternate Plugin as a source
+#		-F PLUGIN_FILTER_NAME used to specify that content should get filtered through the named Plugin
+#
+#	Sample Command Lines (Again, {ff-call} is used in place of a command such as "perl Feedfetcher\ff.pl" or "Feedfetcher/ff")
+#
+#	Sample Command Line 1: {ff-call}					--	runs FF normally, with Push and/or Pull mode active as indicated, 
+#															waking up every [Interval] minutes in Pull mode
+#	Sample Command Line 2: {ff-call} -pitaS 1440		-- 	runs FF once to grab 1440 minutes worth of content (one day), then quits
+#	Sample Command Line 3: {ff-call} -pitaS 10000000	-- runs FF once to grab 1,000,000 minutes worth of content, then quits.
+#															1,000,000 minutes is farthest back FF can go, due to the seconds-since-1970 programming issue)
+#	Sample Command Line 4: {ff-call} -pita				-- runs FF once, then quits
+#	Sample Command Line 5: {ff-call} -pitalk			-- runs FF once, using files form /local-source, and leaves those files there
+#	Sample Command Line 6: {ff-call} -patRL 100			-- runs FF once to grab last 100 files from a Plugin source, and places them in Raw_dir
+#	Sample Command Line 7: {ff-call} -patlkF THE_FILTER	-- runs FF once to copy files from Local_dir and run them through the named Plugin Filter
+#
+#
+#	IF YOU CANNOT START FEEDFETCHER:
+#
+#	FeedFetcher has two locking mechanisms built in. One, so that the same FeedFetcher cannot be
+#	run twice, places a file called feedfetcher.pid in your root FeedFetcher directory. If FeedFetcher
+#	is halted abnormally, that feedfetcher.pid file may still be there.
+#
+#	Simply remove feedfetcher.pid to be able to restart the software.
+#
+#	Secondly, if you have exceeded your custom-set maximum number of files in one run of the software,
+#	then FeedFetcher will quit, and place a .cancel_ff "lock file" in your root FeedFetcher directory.
+#
+#	Simply remove .cancel_ff to be able to restart the software.
+
+
+# -----------------------------------------------------------------------------------------------------
+# Login Parameters for XML Team server
+# -----------------------------------------------------------------------------------------------------
+
+XT_User=rotohog
+XT_Pass=c0mp0s1t3
+Download_blob_only = 1
+
+# -----------------------------------------------------------------------------------------------------
+# Pull Connection Parameters
+# -----------------------------------------------------------------------------------------------------
+
+# URLs for reaching XML Team's Feed Server and for reaching our time synchronization and threshold alerting services)
+# 	Define as many as you've been given access to
+#	(as XT_Server_1, XT_Server_2, etc.)
+
+# Primary Servers:
+# feed4 is outside of their normal DC, it's the backup server
+# typically, these are set to feed6 & feed7
+#XT_Server_1=feed4.xmlteam.com
+XT_Server_1=feed7.xmlteam.com
+
+# Secondary Servers:
+XT_Server_2=feed6.xmlteam.com
+
+# Path for reaching content on XML Team's Feed Server
+# 	Example 1 gets all content you've been authorized to receive:
+#		XT_Feed_path=sportsml/getFeed
+# 	Example 2 just gets NBA content:
+#		XT_Feed_path=sportsml/getFeed/basketball/l.nba.com
+#	Example 3 gets archival content for all (permissioned) sports for 7/17/2004:
+#		XT_Feed_path=sportsml/getTreeFeed/2004/07/17
+#		(NOTE: For archival content, your Primary Server must be (temporarily) assigned to archive.xmlteam.com)
+# 	Example 4 just gets archived MLB content from 7/17/2004:
+#		XT_Feed_path=sportsml/getTreeFeed/2004/07/17/baseball/l.mlb.com
+#	Example 5 gets content from the /highlights directory, grabbing all NFL game-by-game player & team stats from 2004
+#		XT_Feed_path=sportsml/getTreeFeed/highlights/american-football/l.nfl.com/event-stats/2004
+
+XT_Feed_path=sportsml/getTreeFeed/american-football/l.nfl.com
+
+# Number of runs to stay on the Secondary Servers, before attempting to reconnect to the Primary Server
+XT_alt_server_runs=3
+
+# [Pull_retries] is the number of times to attempt to connect to servers
+
+Pull_Retries=3
+
+
+# -----------------------------------------------------------------------------------------------------
+# Pull Configuration Parameters
+# -----------------------------------------------------------------------------------------------------
+
+# Pull Service is when FeedFetcher makes http requests (whether scheduled requests or impromptu requests)
+#	to one or more Feed Sources, and then processes the data.
+#
+# [Pull_mode] is either "active" or "inactive"
+#
+# [Pull_Interval] is the number of minutes that FeedFetcher should sleep between trying to pull new content
+#
+# [Source_#] is the ordered set of sources that shall be checked every [Interval] minutes.
+#	Sample values are:
+#		"XT" for XML Team's server
+#		"Local" for the directory specified in [Source_dir], whereby FeedFetcher
+#			will not re-process a document that recently been processed
+#		"LocalForced" for the directory specified in [Source_dir], whereby FeedFetcher
+#			will *always* re-process documents found in that directory,
+#			regardless of whether they were recently processed.
+#
+# FeedFetcher will get all content since last [Pull_Since] MINUTES if it is being run for the first time, or
+# 	if the -s command line option is used.
+#
+# FeedFetcher keeps track of the last time it has accessed the XML Team servers by updating the
+#	contents of a file called "ff_last_access", located inside FeedFetcher's home directory.
+#
+# [Pull_last_access_cap] is the maximum number of MINUTES into the past that FeedFetcher will go,
+#	regardless of the [Last_access] time or the [Since] value.
+#	If Last_access_cap=0, then FeedFetcher will go as far back as [Last_access] or [Since]
+#
+# [Pull_delay] puts in a time-shift delay by this many minutes (1 day == 1440 minutes)
+#	Use our time-shift minute calculator at http://www.xmlteam.com/documentation/time-shifter.php
+#	to calculate the number of minutes from the present.
+# 	Sample value for going from 1/23/04 back to 9/12/03: Delay=192230
+#
+# [Pull_now] acts somewhat like [Pull_delay], in that it lets you get content from the past.
+#	However, when the [Now] parameter is used, the XML Team server figures out
+#	how much of a Delay to create. Format is our ISO date-timestamp, as in:
+#		Now=20030915T220000-0500
+#	(which goes back to Sept. 15, 2003, at 10pm Eastern Time).
+#
+# When to use [Pull_delay] and when to use [Pull_now]
+#	Use [Pull_delay] when you want to run FeedFetcher on an ongoing basis, simulating
+#		life back in the past.
+#	Use [Pull_now] when you ALWAYS want FeedFetcher to reach back to the exact same
+#		time interval.
+#	Setting both [Pull_delay] and [Pull_now] to non-zero values also works, but we're not
+#		quite sure what that's good for!
+
+#
+#	REMINDER: All these four time parameters below are measured in MINUTES,
+#		  except for [Pull_now], which is an ISO timestamp.
+#
+
+Pull_mode=active
+Pull_Interval=1
+
+Source_1=XT
+Source_2=LocalForced
+
+Pull_Since=30
+Pull_Last_access_cap=30
+Pull_Delay=0
+Pull_Now=0
+
+
+# -----------------------------------------------------------------------------------------------------
+# Push Configuration Parameters
+# -----------------------------------------------------------------------------------------------------
+
+# Push Service is when FeedFetcher runs an embedded http Web Server, which receives (via http post)
+#	new content from XML Team (or other sources)
+#
+# [Push_mode] is either "active" or "inactive"
+#
+# [Push_host] is generally the IP address at which FeedFetcher's internal web server can be accessed.
+# [Push_port] is the port that this web server should be run on.
+# 	Once running, the web server found at http://[Push_host]:[Push_port] should produce a very simple
+#	"404 Not Found" for that URL.
+# 	If it does not, you may need to change these parameters to the domain name that is internal to your LAN.
+# [Push_timeout] is the amount of time the webserver timeouts on a pushed document
+
+Push_mode=inactive
+Push_host=
+Push_port=8083
+Push_timeout=30
+
+
+
+# -----------------------------------------------------------------------------------------------------
+# Database Parameters
+# -----------------------------------------------------------------------------------------------------
+
+# [Use_database] governs whether or not the content gets loaded into the database.
+#	Value is either "True" or "False"
+
+Use_database=False
+# Use_database=False
+
+# [Base_db_dir] is used to hold the full SportsML documents as referenced by the database.
+Base_db_dir={home}/archive
+
+# Set this to 1 to have the sportsml saved to the document_contents.sportsml_blob field
+# rather than to disk. Note: This will result in NO data being saved to the archive directory.
+# Also note that scaleability for this is not currently known.
+Store_Sportsml_in_DB=0
+
+# Set archive_sportsml to 1 to have the sportsml that is processed stored in the archive directory specified
+# in Base_db_dir. Setting it to 0 results in no archiving. Defaults to 1.
+archive_sportsml=1
+
+# Switches determining whether to load xtoss (now known as SportsDB) and/or flexsport database schemas
+
+Load_xtoss=1
+Load_flexsport=0
+
+
+# [DBtype] can currently only equal "mysql" or "sqlserver" or "postgresql"
+# [DBhost] allows FeedFetcher to find the database on your system.
+# 	If DBtype=mysql or postgresql, then use [DBhost] to fill in the URL address of the database.
+# 		(No "http://" is needed. Use "localhost" for a local database.)
+# 	If DBtype=sqlserver, then use [DBname] to fill in the name of the database.
+# 		[DBname] is the name for a SQL Server database (Use "LocalServer" for a local database.)
+#		Note: This would match a value on your "System DSN" tab found via
+#		Control Panel... Administrative Tools... Data Sources (ODBC)
+# [DBdatabase] gives the name of the database into which this content will load
+# [DBuser] and [DBpass] are your username and password to access the database
+#	If DBtype=mysql or postgresql, if no login is necessary, you can use these values, leaving DBpass blank:
+#		DBuser=root
+#		DBpass=
+
+
+# Example for MySQL and PostgreSQL:
+#
+# DBtype=mysql
+# DBhost=localhost
+# DBdatabase=sportsdb
+# DBuser=root
+# DBpass=
+
+
+# Example for SQL Server:
+#
+# DBtype=sqlserver
+# DBname=LocalServer
+# DBdatabase=sportsdb
+# DBuser=
+# DBpass=
+
+
+# [DB_Sport_Maps_dir] is the directory with database loading configuration files for specific sports statistics
+# [DB_do_stats] determines whether or not to break stats out into individual fields
+#	1 == break out stats and load them into stats tables
+#	0 == do not load stats into stats tables
+# [Pbp_file] is the location of a configuration file that drives the indexing of in-game actions
+# [Action_tables] can be "active" or "inactive", and drives the loading of the action_* tables.
+
+DB_sport_maps_dir={home}/dbSportMaps
+DB_do_stats=1
+Pbp_file={home}/dbSportMaps/pbp.def
+Action_tables=active
+
+# [Db_connection_time] is the amount of time FeedFetcher runs before doing a forced reconnection to the database.
+#	This is especially handy for databases that may expire an otherwise steady connection.
+#	Value is measured in minutes.
+
+Db_connection_time=10
+
+
+# -----------------------------------------------------------------------------------------------------
+# Directory Parameters
+# -----------------------------------------------------------------------------------------------------
+
+# Directories, relative to {home} directory set as Environment Variable during installation:
+
+# [Source_dir] is the directory to recursively load content from, when the -l (LOCAL) switch is used
+# [Local_always_raw] is a setting that governs how files placed in [Source_dir] are treated.
+#	Local_always_raw=0 means treat ALL files as unfiltered source files
+#	Local_always_raw=1 means pre-process only the *.raw files through the transformation filter
+#		listed in [Local_default_plugin]. Leave the *.xml files as already-filtered final-form SportsML
+#
+# [Log_level] specifies the level of detail desired within logfiles. Levels listed above include all content from those below:
+#	DBG -- Debug  	-- Inlcudes lots of diagnostics info
+#	ADV -- Advisory -- Includes warnings about non-fatal (and generally innocuous) content deficiencies
+#	HI  -- High	-- Includes notices when documents have been processed
+#	MED -- Medium	-- Includes notices when each PULL run starts and stops
+#	LOW -- Low	-- Includes notices when each document has been downloaded, as well as problematic errors.
+#			   (Errors are prefixed by "[ERR]")
+
+Source_dir={home}/local-source
+Forced_source_dir={home}/local-source
+Local_always_raw=1
+Local_default_plugin=XT
+
+# Directory to place content that generated transformation errors or other kinds of errors
+Feed_error_dir={home}/feeds/error
+Filter_error_dir={home}/feeds/error/filter
+
+# Directory that contains the xsl stylesheets used for transformation of content
+Stylesheet_dir={home}/xsl
+
+# Log file path and filenames
+
+Log_path={home}/logs/log.txt
+Log_level=DBG
+
+# Directory that contains configuration files for active fixtures
+Active_fixtures_dir={home}/conf/content-rules
+
+# Directory is used for debugging, and is only active when using the -R flag.
+# When filtering incoming content through a plugin, this directory holds files waiting to be processed
+Raw_dir={home}/working
+
+Hierarchy_levels=sport,organization,league,caliber,conference,division,team,player,composite-games,sport-category,gender,competition,country
+
+
+
+# -----------------------------------------------------------------------------------------------------
+# Transformation Parameters
+# -----------------------------------------------------------------------------------------------------
+
+# Transform section controls the conversion of SportsML into other formats.
+#	Daisy-chained options should be separated via a comma. Examples:
+#
+#		Transform_1=identity			-- Write out original SportsML, unchanged
+#		  or
+#		Transform_1=sportsml2html-sample			-- Go from SportsML-to-HTML (via \xsl\sportsml2html-sample.xsl)
+#		  or
+#		Transform_1=sportsml2html-sample, html2text		-- Go from SportsML-to-HTML, then HTML-to-ASCII
+#
+# 	Transform_stagin_dir_1 is the intermediate destination directory for the feeds, while the
+#		files are being written out. Once the fully transformed files are complete, they
+#		get dropped into Transform_dir_1.
+# 	Transform_dir_1 is the destination directory for the feeds
+# 	Transform_suffix_1 is the resulting filename extension applied
+#	Transform_active_fixtures_1 allows you to only pass particular fixtures through this transform
+# 	Transform_layout_1 is the directory layout of files retrieved from XML Team,
+#		beneath the various [Transform_dir_#] directories
+#		(with the "#" standing in for a number).
+#		Depending on value, content gets layed out:
+#
+# 		flat: 			into a single directory: [Transform_dir_#]
+#		basic:			into yyyy/mm/dd directory structure
+#		event:			into a consistent flat-filename structure
+#						event-oriented info goes inside [sport-name]/[league-key]/[document-class]/[event-key]/[fixture-key].EXTENSION structure
+#						league-specific fixtures go inside [sport-name]/[league-key]/[document-class]/[fixture-key].EXTENSION structure
+#						team-specific fixtures go inside [sport-name]/[league-key]/[document-class]/[fixture-key]-[team-key].EXTENSION structure
+#						(with "EXTENSION" being the Transform_suffix filename extension you've chosen)
+#		content_tree:		into sport/league/document-class/fixture-key/[doc-id].EXTENSION structure
+#		date_content_tree:	into yyyy/sport/league/document-class/mm/dd structure
+#
+#	Many parallel transforms can be applied to the content, by setting up different groups:
+#		Transform_1=identity
+#		Transform_2=sportsml2html-sample, html2text
+#		Transform_3=sportsml2html-sample
+
+# Transform_1=identity
+# Transform_staging_dir_1={home}/staging
+# Transform_dir_1={home}/feeds
+# Transform_suffix_1=xml
+# Transform_active_fixtures_1=active-fixtures-docs
+# Transform_layout_1=content_tree
+
+# Transform_2=sportsml2html-sample
+# Transform_staging_dir_2={home}/staging
+# Transform_dir_2={home}/feeds
+# Transform_suffix_2=html
+# Transform_active_fixtures_2=active-fixtures-docs
+# Transform_layout_2=content_tree
+
+# Transform_3=sportsml2html-sample, html2text
+# Transform_staging_dir_3={home}/staging
+# Transform_dir_3={home}/feeds
+# Transform_suffix_3=txt
+# Transform_active_fixtures_3=active-fixtures-docs
+# Transform_layout_3=content_tree
+
+
+# [Local_XSLT] allows you to designate an XSLT filter to transform all incoming content prior
+#	to it being processed by FeedFetcher. Leaving this value blank designates that
+#	no preprocessing transformation script should be use. Sample value:
+#	Local_XSLT={home}/xsl/my-preprocessor.xsl
+
+Local_XSLT=
+
+# [Postprocessor] allows you to designate an executable program that should run against all incoming
+#	content following the completion of that document's processing by FeedFetcher. Leaving this
+#	value blank designates that no postprocessing script should be use.
+#	NOTE: Windows Users should use \ slashes rather than / slashes in the pathnames below.
+#	Sample values:
+#	Postprocessor=perl -e "my $nc = 0; while (<STDIN>) { $nc += length; }; print qq{$nc\n};"
+#		(this sample command line runs a one-line perl script on each document that computes the filesize)
+#	Postprocessor=perl {home}/perl/Tools/bytecounter.pl
+#		(this sample command runs that same one-line perl script, but from a saved file)
+#	Postprocessor={home}\perl\Tools\nl.exe
+#		(this sample (Windows Only!) script numbers all the lines of each document)
+
+Postprocessor=
+
+
+
+# -----------------------------------------------------------------------------------------------------
+# Pull Threshold Parameters
+# -----------------------------------------------------------------------------------------------------
+
+# The Pull_Stop_threshold is the maximum number of documents that FeedFetcher can pull down
+#	in one running of the program, before it shuts itself down.
+#	Running "perl \Tools\restore.pl will
+#		reset FeedFetcher so that it will run again.
+#		(or, simply remove the Feedfetcher\.cancel_ff "lock-file")
+# The Pull_Warn_threshold is the minimum number of documents that FeedFetcher will pull down
+#	in one running of the program that will trigger the distribution of a
+#	warning message.
+#	The command-line option -w runs FeedFetcher WITHOUT throttling
+#
+# The Alarm_Server is the XML Team server which receives notifications that a threshold
+#	has been surpassed.
+#
+# The Stop_file is an optional file that can get dropped into the Feed_dir at the same
+#	time that a Stop Alert is emailed out. It is an HTML file that gets translated
+#	to text via FeedFetcher's HTML-to-ASCII translator.
+# The Warn_file is an optional file that can get dropped into the Feed_dir at the same
+#	time that a Warning Alert is emailed out. Like the Stop_file, it is an HTML file
+#	that gets translated to text via FeedFetcher's HTML-to-ASCII translator.
+# Before dropping an Alert file into the Feed_dir, FeedFetcher will change the file
+#	extension from its current value to the value given in [Alert_suffix].
+# In addition to sending these Alerts to email addresses maintained on XML Team's server,
+#	the Alert emails will also be sent to the comma-separated email addresses
+#	listed in the [Alert_to] field
+#
+# NOTE: Email Alerts do NOT get sent via any mail server located on the machine that
+#	is locally running FeedFetcher. Instead, FeedFetcher sends the message via
+#	http to a mail server running at XML Team.
+
+Pull_Stop_threshold=0
+Pull_Warn_threshold=0
+
+Alarm_Server=feed3.xmlteam.com
+
+Stop_file={home}/alerts/stoppage-alert.txt
+Warn_file={home}/alerts/warning-alert.txt
+Alert_suffix=txt
+
+# Multiple Alert_to values should be separated by commas.
+Alert_to=ff.alarm.test@xmlteam.com
+
+
+# -----------------------------------------------------------------------------------------------------
+# Schema Validation
+# -----------------------------------------------------------------------------------------------------
+
+# FeedFetcher can optionally validate all incoming data against the SportsML schema.
+# Invalid documents still flow through the system, but validation errors are logged in
+# the logfile designated below.
+
+# Schema_Path={home}/schema/sportsml.xsd
+# Log_Schema_Path={home}/logs/schema-errors.log
+
+Schema_Path=
+Log_Schema_Path={home}/logs/schema-errors.log
+
