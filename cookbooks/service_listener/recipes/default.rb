@@ -9,9 +9,6 @@ node[:applications].each do |app_name,data|
 
   if ['util'].include?(node[:instance_role])
      run_for_app(app_name) do |app_name, data|
-       owner "root"
-       group "root"
-
        execute "svscan-add-to-inittab" do
        end
        execute "telinit q" do
