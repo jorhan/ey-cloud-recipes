@@ -27,10 +27,12 @@ node[:applications].each do |app_name,data|
     
 
     #TODO : this command fail in build need to fix it
+   
     if File.exists?("/data/${app_name}/current")
       unless File.exists?("/data/${app_name}/FeedFetcherDeluxe")
         run_for_app(app_name) do |app_name, data|
-          execute "cd /data/${app_name} && tar xzvf /data/${app_name}/current/lib/feedfetcher.tar.gz" do
+          execute "extract files" do
+            command "cd /data/${app_name} && tar xzvf /data/${app_name}/current/lib/feedfetcher.tar.gz"
           end
 
         end

@@ -23,6 +23,10 @@ node[:applications].each do |app_name,data|
        owner user[:username]
        group user[:username]
        mode 0744
+       variables({
+           :app_name => app_name,
+           :rails_env => node[:environment][:framework_env] 
+       })       
      end
 
      link "/service/stats_feeder" do
