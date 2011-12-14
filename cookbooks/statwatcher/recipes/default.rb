@@ -8,13 +8,6 @@ node[:applications].each do |app_name,data|
   user = node[:users].first
 
   if ['util'].include?(node[:instance_role])
-     run_for_app(app_name) do |app_name, data|
-       execute "svscan-add-to-inittab" do
-       end
-       execute "telinit q" do
-       end
-
-     end
      
      unless File.exists?("/var/services")
        Dir::mkdir("/var/services")
@@ -55,7 +48,7 @@ node[:applications].each do |app_name,data|
      end    
 
     run_for_app(app_name) do |app_name, data|
-      execute "svc /service/stats_watcher" do
+      execute "svc  -k /service/stats_watcher" do
       end
     end
 

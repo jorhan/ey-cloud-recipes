@@ -4,9 +4,18 @@
 #  }
 #end
 
+require_recipe "setup_daemontool"
 require_recipe "statwatcher"
 require_recipe "service_listener"
+require_recipe "setup_stats_feeder"
+require_recipe "stats_feeder_daemon"
 
+#force change ownership to 'deploy'
+#recommend by EY tech support
+#execute "force deploy ownership" do
+#  command "chown -R deploy:deploy /home/deploy"
+#end
+        
 # uncomment to turn on thinking sphinx/ultra sphinx. Remember to edit cookbooks/sphinx/recipes/default.rb first!
 # require_recipe "sphinx"
 

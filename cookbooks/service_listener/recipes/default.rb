@@ -7,15 +7,7 @@ require 'pp'
 node[:applications].each do |app_name,data|
   user = node[:users].first
 
-  if ['util'].include?(node[:instance_role])
-     run_for_app(app_name) do |app_name, data|
-       execute "svscan-add-to-inittab" do
-       end
-       execute "telinit q" do
-       end
-
-     end
-    
+  if ['util'].include?(node[:instance_role])    
     
      unless File.exists?("/var/services")
        Dir::mkdir("/var/services")
@@ -26,6 +18,7 @@ node[:applications].each do |app_name,data|
      unless File.exists?("/var/services/service_listener/run")
        File.open("/var/services/service_listener/run", 'w') {|f| f.write("") }
      end
+     
     template "/var/services/service_listener/run" do
        source "run.erb"
        owner user[:username]
@@ -43,6 +36,7 @@ node[:applications].each do |app_name,data|
      unless File.exists?("/var/services/service_listener/log/run")
        File.open("/var/services/service_listener/log/run", 'w') {|f| f.write("") }
      end    
+
      template "/var/services/service_listener/log/run" do
        source "run_log.erb"
        owner user[:username]
@@ -50,12 +44,15 @@ node[:applications].each do |app_name,data|
        mode 0744
      end    
 
-     link "/service/service_listener" do
-       to "/var/services/service_listener"
-     end    
+     unless File.exists?("/services/service_listener") 
+       link "/service/service_listener" do
+         to "/var/services/service_listener"
+       end    
+     end
 
     run_for_app(app_name) do |app_name, data|
-      execute "svc /service/service_listener" do
+
+      execute "svc -k /service/service_listener" do
       end
     end
 
