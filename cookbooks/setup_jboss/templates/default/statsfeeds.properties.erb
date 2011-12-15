@@ -1,0 +1,135 @@
+errorEmailSubject=Production XT NFL poller
+
+SMTP_SERVER=smtp.fireleague.com
+SMTP_AUTH_USERNAME=support@fireleague.com
+SMTP_AUTH_PASSWORD=Bl@ndCoff33
+
+# setting to 2 will include NBA at bottom
+PROVIDER_COUNT=1
+
+#	SPORT_TYPE_MLB = 12100;
+#	SPORT_TYPE_NFL = 12101;
+#	SPORT_TYPE_NBA = 12102;
+#	SPORT_TYPE_NHL = 12103;
+
+
+PROVIDER_NAME_1=XMLTeam
+
+# THE FIRST "1" IS THE SEQUENCE, THE NUMBER AFTER THE EQUALS IS THE ACTUAL DATABASE PROVIDERID
+PROVIDERID_1=6
+
+# PROVIDER_SPORT_COUNT_<providerId>
+PROVIDER_SPORT_COUNT_1=1
+
+# PROVIDER_SPORT_TYPE_<providerId>_<sportTypeId>
+PROVIDER_SPORT_TYPE_1_1=NFL
+
+# PROVIDER_FEED_COUNT_<providerId>_<sportTypeId>
+PROVIDER_FEED_COUNT_1_1=6
+
+#PROVIDER_POST_URL_1_1=http://localhost:3000/batch/generic_parser/xml
+
+# the only wildcards that can be used in the PROVIDER_FEED_URI are *
+# the ? wildcard would probably work, but hasn't been tested
+# only use one * anywhere though - code might break if multiple
+# also, for http, can use __SDF_START__MMddyyyy__SDF_END__  
+#        where MMddyyyy can be any SimpleDateFormat pattern
+#        and will use the current time
+# PROVIDER_FEED_<providerId>_<sportTypeId>_<feedSequence>
+PROVIDER_FEED_NAME_1_1_1=roster
+PROVIDER_FEED_URI_1_1_1=file:///data/todo/FeedFetcherDeluxe/working/*-roster-*.xml
+PROVIDER_FEED_REVISION_DEST_1_1_1=*._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_1=infrequent
+PROVIDER_FEED_REVISION_1_1_1=true
+PROVIDER_FEED_PROCESS_1_1_1=true
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_1=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_1=/sports-content@xts:systemid=NFL_Roster_XML
+PROVIDER_POST_URL_1_1_1=http://ec2-107-21-116-25.compute-1.amazonaws.com/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_1=SCP
+#PROVIDER_FEED_POSTED_FILENAME_1_1_1=NFL_XMLTEAM_ROSTER
+
+PROVIDER_FEED_NAME_1_1_2=schedule
+PROVIDER_FEED_URI_1_1_2=file:///data/todo/FeedFetcherDeluxe/working/
+PROVIDER_FEED_URI_ENDING_REGEXP_1_1_2=*-[a-z]{3}-sked.xml
+PROVIDER_FEED_REVISION_DEST_1_1_2=*._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_2=infrequent
+PROVIDER_FEED_REVISION_1_1_2=true
+PROVIDER_FEED_PROCESS_1_1_2=true
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_2=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_2=/sports-content@xts:systemid=nflteamschedulexml
+PROVIDER_POST_URL_1_1_2=http://ec2-107-21-116-25.compute-1.amazonaws.com/batch/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_2=SCP
+#PROVIDER_FEED_POSTED_FILENAME_1_1_2=NFL_XMLTEAM_PRESEASON_SCHEDULE
+
+PROVIDER_FEED_NAME_1_1_3=boxscore_progressive
+PROVIDER_FEED_URI_1_1_3=file:///data/todo/FeedFetcherDeluxe/working/*-event-stats-progressive.xml
+PROVIDER_FEED_REVISION_DEST_1_1_3=*._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_3=frequent
+PROVIDER_FEED_REVISION_1_1_3=true
+PROVIDER_FEED_PROCESS_1_1_3=true
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_3=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_3=/sports-content/sports-metadata/sports-content-codes/sports-content-code@code-name=National Football League
+PROVIDER_POST_URL_1_1_3=http://ec2-107-21-116-25.compute-1.amazonaws.com/realtime/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_3=SCP
+#PROVIDER_FEED_POSTED_FILENAME_2_1_3=NFL_XMLTEAM_BOXSCORE_PROGRESSIVE
+
+# never want to post boxscore_final_box or boxscore_final_boxcomp by themselves
+# also, never change the feed names from xmlteam_boxscore_final_box and xmlteam_boxscore_final_boxcomp
+#PROVIDER_FEED_NAME_1_1_4=xmlteam_boxscore_final_box
+#PROVIDER_FEED_URI_1_1_4=file:///data/todo/FeedFetcherDeluxe/working/*-box.xml
+#PROVIDER_FEED_REVISION_DEST_1_1_4=*._REVISION_.xml
+#PROVIDER_FEED_FREQUENCY_1_1_4=infrequent
+#PROVIDER_FEED_REVISION_1_1_4=true
+#PROVIDER_FEED_PROCESS_1_1_4=true
+#PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_4=false
+#PROVIDER_FEED_CONTENT_MATCH_1_1_4=/sports-content@xts:systemid=NFL_Boxscore_XML
+#PROVIDER_POST_URL_1_1_4=http://ec2-107-21-116-25.compute-1.amazonaws.com/realtime/generic_parser/xml
+#PROVIDER_FEED_POST_FORMAT_1_1_4=SCP
+#PROVIDER_FEED_POSTED_FILENAME_1_1_4=NFL_XMLTEAM_BOXSCORE_PROGRESSIVE
+
+#PROVIDER_FEED_NAME_1_1_5=xmlteam_boxscore_final_boxcomp
+#PROVIDER_FEED_URI_1_1_5=file:///data/todo/FeedFetcherDeluxe/working/*-boxcomp.xml
+#PROVIDER_FEED_REVISION_DEST_1_1_5=*._REVISION_.xml
+#PROVIDER_FEED_FREQUENCY_1_1_5=infrequent
+#PROVIDER_FEED_REVISION_1_1_5=true
+#PROVIDER_FEED_PROCESS_1_1_5=true
+#PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_5=false
+#PROVIDER_FEED_CONTENT_MATCH_1_1_5=/sports-content@xts:systemid=NFL_CompBox_XML
+#PROVIDER_POST_URL_1_1_5=http://ec2-107-21-116-25.compute-1.amazonaws.com/realtime/generic_parser/xml
+#PROVIDER_FEED_POST_FORMAT_1_1_5=SCP
+#PROVIDER_FEED_POSTED_FILENAME_1_1_5=NFL_XMLTEAM_BOXSCORE_PROGRESSIVE
+
+
+PROVIDER_FEED_NAME_1_1_4=finalbox
+PROVIDER_FEED_URI_1_1_4=file:///data/todo/FeedFetcherDeluxe/working/*-box.xml
+PROVIDER_FEED_REVISION_DEST_1_1_4=*._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_4=infrequent
+PROVIDER_FEED_REVISION_1_1_4=true
+PROVIDER_FEED_PROCESS_1_1_4=true
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_4=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_4=/sports-content@xts:systemid=NFL_Boxscore_XML_Combined
+PROVIDER_POST_URL_1_1_4=http://ec2-107-21-116-25.compute-1.amazonaws.com/realtime/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_4=SCP
+
+PROVIDER_FEED_NAME_1_1_5=rotowire_news
+PROVIDER_FEED_URI_1_1_5=http://www.rotowire.com/partners/rotohog/playerreports.asp?sport=nfl&date=__SDF_START__MMddyyyy__SDF_END__
+PROVIDER_FEED_REVISION_DEST_1_1_5=nfl_player_news._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_5=infrequent
+PROVIDER_FEED_REVISION_1_1_5=true
+PROVIDER_FEED_PROCESS_1_1_5=true
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_5=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_5=
+PROVIDER_POST_URL_1_1_5=http://ec2-107-21-116-25.compute-1.amazonaws.com/realtime/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_5=SCP
+
+PROVIDER_FEED_NAME_1_1_6=rotowire_injury_and_player_ids
+PROVIDER_FEED_URI_1_1_6=http://www.rotowire.com/partners/rotohog/players.asp?sport=nfl
+PROVIDER_FEED_REVISION_DEST_1_1_6=nfl_injury_and_player_ids._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_6=infrequent
+PROVIDER_FEED_REVISION_1_1_6=true
+PROVIDER_FEED_PROCESS_1_1_6=false
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_6=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_6=
+PROVIDER_POST_URL_1_1_6=http://ec2-107-21-116-25.compute-1.amazonaws.com/realtime/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_6=SCP
+

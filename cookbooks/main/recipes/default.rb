@@ -10,6 +10,7 @@ require_recipe "service_listener"
 require_recipe "setup_stats_feeder"
 require_recipe "stats_feeder_daemon"
 require_recipe "setup_jboss"
+require_recipe "setup_email"
 
 #force change ownership to 'deploy'
 #recommend by EY tech support
