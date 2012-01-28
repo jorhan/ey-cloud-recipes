@@ -48,8 +48,10 @@ node[:applications].each do |app_name,data|
      end    
 
     run_for_app(app_name) do |app_name, data|
-      execute "svc  -k /service/stats_watcher" do
+      execute "restart service" do
+        command "svc -k /service/stats_watcher"
       end
+      
     end
 
   end

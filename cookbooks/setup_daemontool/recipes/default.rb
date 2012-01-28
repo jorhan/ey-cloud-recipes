@@ -9,8 +9,8 @@ node[:applications].each do |app_name,data|
        end
        execute "telinit q" do
        end
-       execute "/etc/init.d/rabbitmq restart" do
-       end
+#       execute "/etc/init.d/rabbitmq restart" do
+#       end
      end
   end
 end

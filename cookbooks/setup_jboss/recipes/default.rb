@@ -3,7 +3,7 @@ require 'pp'
 node[:applications].each do |app_name,data|
   user = node[:users].first
 
-  if ['util'].include?(node[:instance_role])
+  if ['util'].include?(node[:instance_role]) 
      unless File.exists?("/var/log/jboss")
        Dir::mkdir("/var/log/jboss")
      end

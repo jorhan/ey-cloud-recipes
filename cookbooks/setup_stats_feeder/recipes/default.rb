@@ -3,7 +3,7 @@ require 'pp'
 node[:applications].each do |app_name,data|
   user = node[:users].first
 
-  if ['util'].include?(node[:instance_role])
+  if ['util'].include?(node[:instance_role]) 
     
 #    package "dev-java/sun-jdk" do
 #      action :install
@@ -28,29 +28,29 @@ node[:applications].each do |app_name,data|
 
     #TODO : this command fail in build need to fix it
    
-    if File.exists?("/data/todo/current")
-      unless File.exists?("/data/todo/FeedFetcherDeluxe")
-        run_for_app(app_name) do |app_name, data|
-          execute "extract files" do
-            command "cd /data/todo && tar xzvf /data/todo/current/lib/feedfetcher.tar.gz"
-          end
-
+    if File.exists?("/home/deploy") and File.exists?("/data/#{app_name}/current/lib/feedfetcher.tar.gz")
+      unless File.exists?("/home/deploy/FeedFetcherDeluxe")
+        execute "extract files" do
+          command "cd /home/deploy && tar xzvf /data/#{app_name}/current/lib/feedfetcher.tar.gz"
         end
-      end
 
-      template "/data/todo/FeedFetcherDeluxe/conf/feedfetcher.cfg" do
-        source "feedfetcher.erb"
-        owner 'deploy'
-        group 'deploy'
-        mode 0744
       end
-      
-      #create folder where the xml are located
-      unless File.exists?("/data/todo/FeedFetcherDeluxe/working")
-         Dir::mkdir("/data/todo/FeedFetcherDeluxe/working")
-      end           
+      if File.exists?("/home/deploy/FeedFetcherDeluxe/conf/feedfetcher.cfg")
+        template "/home/deploy/FeedFetcherDeluxe/conf/feedfetcher.cfg" do
+          source "feedfetcher.erb"
+          owner 'deploy'
+          group 'deploy'
+          mode 0744
+        end
 
-      
+        #create folder where the xml are located
+        unless File.exists?("/home/deploy/FeedFetcherDeluxe/working")
+           Dir::mkdir("/home/deploy/FeedFetcherDeluxe/working")
+        end           
+      end
+      execute "files ownership" do
+        command "chown -R deploy:deploy /home/deploy/FeedFetcherDeluxe"
+      end      
     end
   end  
 end

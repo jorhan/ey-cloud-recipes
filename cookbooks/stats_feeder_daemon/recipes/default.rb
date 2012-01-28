@@ -7,7 +7,7 @@ require 'pp'
 node[:applications].each do |app_name,data|
   user = node[:users].first
 
-  if ['util'].include?(node[:instance_role])
+  if ['util'].include?(node[:instance_role]) 
      
      unless File.exists?("/var/services")
        Dir::mkdir("/var/services")
@@ -34,7 +34,8 @@ node[:applications].each do |app_name,data|
      end    
 
     run_for_app(app_name) do |app_name, data|
-      execute "svc -k /service/stats_feeder" do
+      execute "restart service" do
+        command "svc -k /service/stats_feeder"
       end
     end
 
