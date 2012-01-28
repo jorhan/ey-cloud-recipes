@@ -1,0 +1,9 @@
+#!/bin/bash
+
+source /etc/profile
+
+export RAILS_ENV=<%= @rails_env %>
+
+export HOME=/home/deploy
+
+exec ruby /data/<%= @app_name %>/current/app/daemons/gameops_automation/bin/game_ops_service_runner.rb 2>&1  
