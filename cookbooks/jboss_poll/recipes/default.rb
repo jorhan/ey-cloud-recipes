@@ -7,7 +7,7 @@ require 'pp'
 node[:applications].each do |app_name,data|
   user = node[:users].first
 
-  if ['util'].include?(node[:instance_role]) and app_name == "todo"
+  if ['util'].include?(node[:instance_role])
      
     
      unless File.exists?("/var/services")
