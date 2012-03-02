@@ -1,4 +1,4 @@
-errorEmailSubject=Production XT NFL poller
+errorEmailSubject=Prod SCP/XT MLB server
 
 SMTP_SERVER=smtp.fireleague.com
 SMTP_AUTH_USERNAME=support@fireleague.com
@@ -16,16 +16,16 @@ PROVIDER_COUNT=1
 PROVIDER_NAME_1=XMLTeam
 
 # THE FIRST "1" IS THE SEQUENCE, THE NUMBER AFTER THE EQUALS IS THE ACTUAL DATABASE PROVIDERID
-PROVIDERID_1=6
+PROVIDERID_1=5
 
 # PROVIDER_SPORT_COUNT_<providerId>
 PROVIDER_SPORT_COUNT_1=1
 
-# PROVIDER_SPORT_TYPE_<providerId>_<sportTypeId>
-PROVIDER_SPORT_TYPE_1_1=NFL
+# PROVIDER_SPORT_TYPE_ID_<providerId>_<sportTypeId>
+PROVIDER_SPORT_TYPE_1_1=MLB
 
 # PROVIDER_FEED_COUNT_<providerId>_<sportTypeId>
-PROVIDER_FEED_COUNT_1_1=6
+PROVIDER_FEED_COUNT_1_1=10
 
 #PROVIDER_POST_URL_1_1=http://localhost:3000/batch/generic_parser/xml
 
@@ -36,6 +36,7 @@ PROVIDER_FEED_COUNT_1_1=6
 #        where MMddyyyy can be any SimpleDateFormat pattern
 #        and will use the current time
 # PROVIDER_FEED_<providerId>_<sportTypeId>_<feedSequence>
+
 PROVIDER_FEED_NAME_1_1_1=roster
 PROVIDER_FEED_URI_1_1_1=file:///home/deploy/FeedFetcherDeluxe/working/*-roster-*.xml
 PROVIDER_FEED_REVISION_DEST_1_1_1=*._REVISION_.xml
@@ -43,10 +44,9 @@ PROVIDER_FEED_FREQUENCY_1_1_1=infrequent
 PROVIDER_FEED_REVISION_1_1_1=true
 PROVIDER_FEED_PROCESS_1_1_1=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_1=false
-PROVIDER_FEED_CONTENT_MATCH_1_1_1=/sports-content@xts:systemid=NFL_Roster_XML
-PROVIDER_POST_URL_1_1_1=http://nflstatsxt.fireleague.com/generic_parser/xml
+PROVIDER_FEED_CONTENT_MATCH_1_1_1=/sports-content@xts:systemid=MLB_Roster_XML
+PROVIDER_POST_URL_1_1_1=http://mlbstatsxt.production.fireleague.com/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_1=SCP
-#PROVIDER_FEED_POSTED_FILENAME_1_1_1=NFL_XMLTEAM_ROSTER
 
 PROVIDER_FEED_NAME_1_1_2=schedule
 PROVIDER_FEED_URI_1_1_2=file:///home/deploy/FeedFetcherDeluxe/working/
@@ -56,10 +56,9 @@ PROVIDER_FEED_FREQUENCY_1_1_2=infrequent
 PROVIDER_FEED_REVISION_1_1_2=true
 PROVIDER_FEED_PROCESS_1_1_2=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_2=false
-PROVIDER_FEED_CONTENT_MATCH_1_1_2=/sports-content@xts:systemid=nflteamschedulexml
-PROVIDER_POST_URL_1_1_2=http://nflstatsxt.fireleague.com/batch/generic_parser/xml
+PROVIDER_FEED_CONTENT_MATCH_1_1_2=/sports-content@xts:systemid=mlbteamschedulexml
+PROVIDER_POST_URL_1_1_2=http://mlbstatsxt.production.fireleague.com/batch/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_2=SCP
-#PROVIDER_FEED_POSTED_FILENAME_1_1_2=NFL_XMLTEAM_PRESEASON_SCHEDULE
 
 PROVIDER_FEED_NAME_1_1_3=boxscore_progressive
 PROVIDER_FEED_URI_1_1_3=file:///home/deploy/FeedFetcherDeluxe/working/*-event-stats-progressive.xml
@@ -68,68 +67,84 @@ PROVIDER_FEED_FREQUENCY_1_1_3=frequent
 PROVIDER_FEED_REVISION_1_1_3=true
 PROVIDER_FEED_PROCESS_1_1_3=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_3=false
-PROVIDER_FEED_CONTENT_MATCH_1_1_3=/sports-content/sports-metadata/sports-content-codes/sports-content-code@code-name=National Football League
-PROVIDER_POST_URL_1_1_3=http://nflstatsxt.fireleague.com/realtime/generic_parser/xml
+PROVIDER_FEED_CONTENT_MATCH_1_1_3=/sports-content/sports-metadata/sports-content-codes/sports-content-code@code-name=Major League Baseball
+PROVIDER_POST_URL_1_1_3=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_3=SCP
-#PROVIDER_FEED_POSTED_FILENAME_2_1_3=NFL_XMLTEAM_BOXSCORE_PROGRESSIVE
 
-# never want to post boxscore_final_box or boxscore_final_boxcomp by themselves
-# also, never change the feed names from xmlteam_boxscore_final_box and xmlteam_boxscore_final_boxcomp
-#PROVIDER_FEED_NAME_1_1_4=xmlteam_boxscore_final_box
-#PROVIDER_FEED_URI_1_1_4=file:///home/deploy/FeedFetcherDeluxe/working/*-box.xml
-#PROVIDER_FEED_REVISION_DEST_1_1_4=*._REVISION_.xml
-#PROVIDER_FEED_FREQUENCY_1_1_4=infrequent
-#PROVIDER_FEED_REVISION_1_1_4=true
-#PROVIDER_FEED_PROCESS_1_1_4=true
-#PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_4=false
-#PROVIDER_FEED_CONTENT_MATCH_1_1_4=/sports-content@xts:systemid=NFL_Boxscore_XML
-#PROVIDER_POST_URL_1_1_4=http://nflstatsxt.fireleague.com/realtime/generic_parser/xml
-#PROVIDER_FEED_POST_FORMAT_1_1_4=SCP
-#PROVIDER_FEED_POSTED_FILENAME_1_1_4=NFL_XMLTEAM_BOXSCORE_PROGRESSIVE
-
-#PROVIDER_FEED_NAME_1_1_5=xmlteam_boxscore_final_boxcomp
-#PROVIDER_FEED_URI_1_1_5=file:///home/deploy/FeedFetcherDeluxe/working/*-boxcomp.xml
-#PROVIDER_FEED_REVISION_DEST_1_1_5=*._REVISION_.xml
-#PROVIDER_FEED_FREQUENCY_1_1_5=infrequent
-#PROVIDER_FEED_REVISION_1_1_5=true
-#PROVIDER_FEED_PROCESS_1_1_5=true
-#PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_5=false
-#PROVIDER_FEED_CONTENT_MATCH_1_1_5=/sports-content@xts:systemid=NFL_CompBox_XML
-#PROVIDER_POST_URL_1_1_5=http://nflstatsxt.fireleague.com/realtime/generic_parser/xml
-#PROVIDER_FEED_POST_FORMAT_1_1_5=SCP
-#PROVIDER_FEED_POSTED_FILENAME_1_1_5=NFL_XMLTEAM_BOXSCORE_PROGRESSIVE
-
-
-PROVIDER_FEED_NAME_1_1_4=finalbox
+PROVIDER_FEED_NAME_1_1_4=final_box
 PROVIDER_FEED_URI_1_1_4=file:///home/deploy/FeedFetcherDeluxe/working/*-box.xml
 PROVIDER_FEED_REVISION_DEST_1_1_4=*._REVISION_.xml
 PROVIDER_FEED_FREQUENCY_1_1_4=infrequent
 PROVIDER_FEED_REVISION_1_1_4=true
 PROVIDER_FEED_PROCESS_1_1_4=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_4=false
-PROVIDER_FEED_CONTENT_MATCH_1_1_4=/sports-content@xts:systemid=NFL_Boxscore_XML_Combined
-PROVIDER_POST_URL_1_1_4=http://nflstatsxt.fireleague.com/realtime/generic_parser/xml
+PROVIDER_FEED_CONTENT_MATCH_1_1_4=/sports-content@xts:systemid=MLB_Boxscore_XML
+PROVIDER_POST_URL_1_1_4=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_4=SCP
 
-PROVIDER_FEED_NAME_1_1_5=rotowire_news
-PROVIDER_FEED_URI_1_1_5=http://www.rotowire.com/partners/rotohog/playerreports.asp?sport=nfl&date=__SDF_START__MMddyyyy__SDF_END__
-PROVIDER_FEED_REVISION_DEST_1_1_5=nfl_player_news._REVISION_.xml
+PROVIDER_FEED_NAME_1_1_5=sched_change
+PROVIDER_FEED_URI_1_1_5=file:///home/deploy/FeedFetcherDeluxe/working/*-sched-change.xml
+PROVIDER_FEED_REVISION_DEST_1_1_5=*._REVISION_.xml
 PROVIDER_FEED_FREQUENCY_1_1_5=infrequent
-PROVIDER_FEED_REVISION_1_1_5=true
-PROVIDER_FEED_PROCESS_1_1_5=true
+PROVIDER_FEED_REVISION_1_1_5=false
+PROVIDER_FEED_PROCESS_1_1_5=false
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_5=false
-PROVIDER_FEED_CONTENT_MATCH_1_1_5=
-PROVIDER_POST_URL_1_1_5=http://nflstatsxt.fireleague.com/realtime/generic_parser/xml
+#PROVIDER_FEED_CONTENT_MATCH_1_1_5=/sports-content@xts:systemid=MLB_Boxscore_XML
+PROVIDER_POST_URL_1_1_5=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_5=SCP
 
-PROVIDER_FEED_NAME_1_1_6=rotowire_injury_and_player_ids
-PROVIDER_FEED_URI_1_1_6=http://www.rotowire.com/partners/rotohog/players.asp?sport=nfl
-PROVIDER_FEED_REVISION_DEST_1_1_6=nfl_injury_and_player_ids._REVISION_.xml
+PROVIDER_FEED_NAME_1_1_6=prob_pitchers
+PROVIDER_FEED_URI_1_1_6=file:///home/deploy/FeedFetcherDeluxe/working/*-prob-pitchers.xml
+PROVIDER_FEED_REVISION_DEST_1_1_6=*._REVISION_.xml
 PROVIDER_FEED_FREQUENCY_1_1_6=infrequent
 PROVIDER_FEED_REVISION_1_1_6=true
-PROVIDER_FEED_PROCESS_1_1_6=false
+PROVIDER_FEED_PROCESS_1_1_6=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_6=false
-PROVIDER_FEED_CONTENT_MATCH_1_1_6=
-PROVIDER_POST_URL_1_1_6=http://nflstatsxt.fireleague.com/realtime/generic_parser/xml
+PROVIDER_FEED_CONTENT_MATCH_1_1_6=/sports-content@xts:systemid=MLB_Probable_Pitchers_XML
+PROVIDER_POST_URL_1_1_6=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_6=SCP
 
+
+PROVIDER_FEED_NAME_1_1_7=injuries
+PROVIDER_FEED_URI_1_1_7=file:///home/deploy/FeedFetcherDeluxe/working/*-al-injuries.xml
+PROVIDER_FEED_REVISION_DEST_1_1_7=*._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_7=infrequent
+PROVIDER_FEED_REVISION_1_1_7=true
+PROVIDER_FEED_PROCESS_1_1_7=true
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_7=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_7=/sports-content@xts:systemid=Injuries_Detail_XML
+PROVIDER_POST_URL_1_1_7=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_7=SCP
+
+PROVIDER_FEED_NAME_1_1_8=injuries
+PROVIDER_FEED_URI_1_1_8=file:///home/deploy/FeedFetcherDeluxe/working/*-nl-injuries.xml
+PROVIDER_FEED_REVISION_DEST_1_1_8=*._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_8=infrequent
+PROVIDER_FEED_REVISION_1_1_8=true
+PROVIDER_FEED_PROCESS_1_1_8=true
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_8=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_8=/sports-content@xts:systemid=Injuries_Detail_XML
+PROVIDER_POST_URL_1_1_8=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_8=SCP
+
+PROVIDER_FEED_NAME_1_1_9=rotowire_news
+PROVIDER_FEED_URI_1_1_9=http://www.rotowire.com/partners/rotohog/playerreports.asp?sport=mlb&date=__SDF_START__MMddyyyy__SDF_END__
+PROVIDER_FEED_REVISION_DEST_1_1_9=mlb_player_news._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_9=infrequent
+PROVIDER_FEED_REVISION_1_1_9=true
+PROVIDER_FEED_PROCESS_1_1_9=true
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_9=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_9=
+PROVIDER_POST_URL_1_1_9=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_9=SCP
+
+PROVIDER_FEED_NAME_1_1_10=rotowire_injury_and_player_ids
+PROVIDER_FEED_URI_1_1_10=http://www.rotowire.com/partners/rotohog/players.asp?sport=mlb
+PROVIDER_FEED_REVISION_DEST_1_1_10=mlb_injury_and_player_ids._REVISION_.xml
+PROVIDER_FEED_FREQUENCY_1_1_10=infrequent
+PROVIDER_FEED_REVISION_1_1_10=true
+PROVIDER_FEED_PROCESS_1_1_10=false
+PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_10=false
+PROVIDER_FEED_CONTENT_MATCH_1_1_10=
+PROVIDER_POST_URL_1_1_10=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_FEED_POST_FORMAT_1_1_10=SCP

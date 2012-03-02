@@ -13,8 +13,8 @@ node[:applications].each do |app_name,data|
   end         
 
   if ['solo', 'app', 'app_master'].include?(node[:instance_role])
-    if File.exists?("/data/nfl_stats/current")
-      template "/data/nfl_stats/current/config/database.yml" do
+    if File.exists?("/data/mlb_stats_#{node[:environment][:framework_env]}/current")
+      template "/data/mlb_stats_#{node[:environment][:framework_env]}/current/config/database.yml" do
         source "database.yml.erb"
         owner 'deploy'
         group 'deploy'

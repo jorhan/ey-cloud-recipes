@@ -4,18 +4,18 @@
 #  }
 #end
 
-require_recipe "proftp"
+#require_recipe "proftp"
 require_recipe "setup_daemontool"
 require_recipe "setup_email"
 require_recipe "statwatcher"
 require_recipe "service_listener"
 
-require_recipe "setup_stats_feeder"
-require_recipe "stats_feeder_daemon"
+#require_recipe "setup_stats_feeder"
+#require_recipe "stats_feeder_daemon"
 require_recipe "gameops"
-require_recipe "setup_jboss"
+#require_recipe "setup_jboss"
 #
-require_recipe "jboss_poll"
+#require_recipe "jboss_poll"
 require_recipe "setup_stats_db"
 
 #force change ownership to 'deploy'

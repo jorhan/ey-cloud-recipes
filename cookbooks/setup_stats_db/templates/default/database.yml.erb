@@ -1,7 +1,51 @@
+staging:
+  adapter:   postgresql
+  database:  fireleague_mlb
+  username:  deploy
+  password:  EHly4MrKLa
+  host:      ec2-107-21-116-25.compute-1.amazonaws.com
+  reconnect: true
+  
+staging_common:
+  adapter:   postgresql
+  database:  fireleague_mlb
+  username:  deploy
+  password:  EHly4MrKLa
+  host:      ec2-107-21-116-25.compute-1.amazonaws.com
+  reconnect: true
+  
+staging_scpops:
+  adapter:   postgresql
+  database:  fireleague_mlb
+  username:  deploy
+  password:  EHly4MrKLa
+  host:      ec2-107-21-116-25.compute-1.amazonaws.com
+  reconnect: true
+ 
+
 production:
   adapter:   postgresql
-  database:  <%= @app_name %>
+  database:  fireleague_mlb
   username:  deploy
-  password:  2F8vVCbKU4
-  host:      ec2-50-17-79-92.compute-1.amazonaws.com
+  password:  eTwRcm6OR1
+  host:      ec2-50-16-95-252.compute-1.amazonaws.com
   reconnect: true
+
+production_common:
+  adapter:   postgresql
+  database:  fireleague_mlb
+  username:  deploy
+  password:  eTwRcm6OR1
+  host:      ec2-50-16-95-252.compute-1.amazonaws.com
+  reconnect: true
+  
+production_scpops:
+  adapter:   postgresql
+  database:  fireleague_mlb
+  username:  deploy
+  password:  eTwRcm6OR1
+  host:      ec2-50-16-95-252.compute-1.amazonaws.com
+  reconnect: true
+  
+  
+  
