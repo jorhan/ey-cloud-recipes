@@ -30,8 +30,17 @@ node[:applications].each do |app_name,data|
    
     if File.exists?("/home/deploy") and File.exists?("/data/#{app_name}/current/lib/feedfetcher.tar.gz")
       unless File.exists?("/home/deploy/FeedFetcherDeluxe")
+        directory "/home/deploy/FeedFetcherDeluxe" do
+          owner "deploy"
+          group "deploy"
+          action :create
+          mode 0755
+        end        
         execute "extract files" do
-          command "cd /home/deploy && tar xzvf /data/#{app_name}/current/lib/feedfetcher.tar.gz"
+          command "tar xzvf /data/#{app_name}/current/lib/feedfetcher.tar.gz -C /home/deploy/FeedFetcherDeluxe" do
+            owner 'deploy'
+            group 'deploy'            
+          end
         end
 
       end
@@ -50,7 +59,9 @@ node[:applications].each do |app_name,data|
       end
       execute "files ownership" do
         command "chown -R deploy:deploy /home/deploy/FeedFetcherDeluxe"
+        #command "rm -Rf /home/deploy/FeedFetcherDeluxe"
       end      
+
     end
   end  
 end
