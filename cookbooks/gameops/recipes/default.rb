@@ -7,7 +7,7 @@ require 'pp'
 node[:applications].each do |app_name,data|
   user = node[:users].first
 
-  if ['util'].include?(node[:instance_role]) and app_name == "todo"
+  if ['util'].include?(node[:instance_role]) and !(app_name =~ /.stats./)
      
      #TODO
      #run bundle install in /data/todo/current/app/daemons/gameops_automation/
@@ -36,6 +36,22 @@ node[:applications].each do |app_name,data|
            :rails_env => node[:environment][:framework_env] 
        })
      end
+     
+     unless File.exists?("/var/services/gameops/log")
+       Dir::mkdir("/var/services/gameops/log")
+     end
+     unless File.exists?("/var/services/gameops/log/run")
+       File.open("/var/services/gameops/log/run", 'w') {|f| f.write("") }
+     end    
+
+     template "/var/services/gameops/log/run" do
+       source "run_log.erb"
+       owner user[:username]
+       group user[:username]
+       mode 0744
+     end    
+
+    
 
      link "/service/gameops" do
        to "/var/services/gameops"

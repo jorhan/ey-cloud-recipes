@@ -37,7 +37,7 @@ node[:applications].each do |app_name,data|
           mode 0755
         end        
         execute "extract files" do
-          command "tar xzvf /data/#{app_name}/current/lib/feedfetcher.tar.gz -C /home/deploy/FeedFetcherDeluxe" do
+          command "tar xzvf /data/#{app_name}/current/lib/feedfetcher.tar.gz -C /home/deploy" do
             owner 'deploy'
             group 'deploy'            
           end
