@@ -45,7 +45,7 @@ PROVIDER_FEED_REVISION_1_1_1=true
 PROVIDER_FEED_PROCESS_1_1_1=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_1=false
 PROVIDER_FEED_CONTENT_MATCH_1_1_1=/sports-content@xts:systemid=MLB_Roster_XML
-PROVIDER_POST_URL_1_1_1=http://mlbstatsxt.production.fireleague.com/generic_parser/xml
+PROVIDER_POST_URL_1_1_1=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_1=SCP
 
 PROVIDER_FEED_NAME_1_1_2=schedule
@@ -57,7 +57,7 @@ PROVIDER_FEED_REVISION_1_1_2=true
 PROVIDER_FEED_PROCESS_1_1_2=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_2=false
 PROVIDER_FEED_CONTENT_MATCH_1_1_2=/sports-content@xts:systemid=mlbteamschedulexml
-PROVIDER_POST_URL_1_1_2=http://mlbstatsxt.production.fireleague.com/batch/generic_parser/xml
+PROVIDER_POST_URL_1_1_2=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/batch/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_2=SCP
 
 PROVIDER_FEED_NAME_1_1_3=boxscore_progressive
@@ -68,7 +68,7 @@ PROVIDER_FEED_REVISION_1_1_3=true
 PROVIDER_FEED_PROCESS_1_1_3=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_3=false
 PROVIDER_FEED_CONTENT_MATCH_1_1_3=/sports-content/sports-metadata/sports-content-codes/sports-content-code@code-name=Major League Baseball
-PROVIDER_POST_URL_1_1_3=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_POST_URL_1_1_3=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_3=SCP
 
 PROVIDER_FEED_NAME_1_1_4=final_box
@@ -79,7 +79,7 @@ PROVIDER_FEED_REVISION_1_1_4=true
 PROVIDER_FEED_PROCESS_1_1_4=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_4=false
 PROVIDER_FEED_CONTENT_MATCH_1_1_4=/sports-content@xts:systemid=MLB_Boxscore_XML
-PROVIDER_POST_URL_1_1_4=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_POST_URL_1_1_4=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_4=SCP
 
 PROVIDER_FEED_NAME_1_1_5=sched_change
@@ -90,7 +90,7 @@ PROVIDER_FEED_REVISION_1_1_5=false
 PROVIDER_FEED_PROCESS_1_1_5=false
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_5=false
 #PROVIDER_FEED_CONTENT_MATCH_1_1_5=/sports-content@xts:systemid=MLB_Boxscore_XML
-PROVIDER_POST_URL_1_1_5=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_POST_URL_1_1_5=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_5=SCP
 
 PROVIDER_FEED_NAME_1_1_6=prob_pitchers
@@ -101,7 +101,7 @@ PROVIDER_FEED_REVISION_1_1_6=true
 PROVIDER_FEED_PROCESS_1_1_6=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_6=false
 PROVIDER_FEED_CONTENT_MATCH_1_1_6=/sports-content@xts:systemid=MLB_Probable_Pitchers_XML
-PROVIDER_POST_URL_1_1_6=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_POST_URL_1_1_6=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_6=SCP
 
 
@@ -113,7 +113,7 @@ PROVIDER_FEED_REVISION_1_1_7=true
 PROVIDER_FEED_PROCESS_1_1_7=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_7=false
 PROVIDER_FEED_CONTENT_MATCH_1_1_7=/sports-content@xts:systemid=Injuries_Detail_XML
-PROVIDER_POST_URL_1_1_7=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_POST_URL_1_1_7=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_7=SCP
 
 PROVIDER_FEED_NAME_1_1_8=injuries
@@ -124,27 +124,27 @@ PROVIDER_FEED_REVISION_1_1_8=true
 PROVIDER_FEED_PROCESS_1_1_8=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_8=false
 PROVIDER_FEED_CONTENT_MATCH_1_1_8=/sports-content@xts:systemid=Injuries_Detail_XML
-PROVIDER_POST_URL_1_1_8=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_POST_URL_1_1_8=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_8=SCP
 
 PROVIDER_FEED_NAME_1_1_9=rotowire_news
-PROVIDER_FEED_URI_1_1_9=http://www.rotowire.com/partners/rotohog/playerreports.asp?sport=mlb&date=__SDF_START__MMddyyyy__SDF_END__
+PROVIDER_FEED_URI_1_1_9=http://www.rotowire.com/partners/fireleague/playerreports.asp?sport=mlb&date=__SDF_START__MMddyyyy__SDF_END__
 PROVIDER_FEED_REVISION_DEST_1_1_9=mlb_player_news._REVISION_.xml
 PROVIDER_FEED_FREQUENCY_1_1_9=infrequent
 PROVIDER_FEED_REVISION_1_1_9=true
 PROVIDER_FEED_PROCESS_1_1_9=true
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_9=false
 PROVIDER_FEED_CONTENT_MATCH_1_1_9=
-PROVIDER_POST_URL_1_1_9=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_POST_URL_1_1_9=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_9=SCP
 
 PROVIDER_FEED_NAME_1_1_10=rotowire_injury_and_player_ids
-PROVIDER_FEED_URI_1_1_10=http://www.rotowire.com/partners/rotohog/players.asp?sport=mlb
+PROVIDER_FEED_URI_1_1_10=http://www.rotowire.com/partners/fireleague/players.asp?sport=mlb
 PROVIDER_FEED_REVISION_DEST_1_1_10=mlb_injury_and_player_ids._REVISION_.xml
 PROVIDER_FEED_FREQUENCY_1_1_10=infrequent
 PROVIDER_FEED_REVISION_1_1_10=true
 PROVIDER_FEED_PROCESS_1_1_10=false
 PROVIDER_FEED_SEND_EMAIL_ON_PROCESS_1_1_10=false
 PROVIDER_FEED_CONTENT_MATCH_1_1_10=
-PROVIDER_POST_URL_1_1_10=http://mlbstatsxt.production.fireleague.com/realtime/generic_parser/xml
+PROVIDER_POST_URL_1_1_10=http://mlbstatsxt.<%= @rails_env %>.fireleague.com/realtime/generic_parser/xml
 PROVIDER_FEED_POST_FORMAT_1_1_10=SCP
