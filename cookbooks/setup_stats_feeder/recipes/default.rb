@@ -29,21 +29,21 @@ node[:applications].each do |app_name,data|
     #TODO : this command fail in build need to fix it
    
     if File.exists?("/home/deploy") and File.exists?("/data/#{app_name}/current/lib/feedfetcher.tar.gz")
-      unless File.exists?("/home/deploy/FeedFetcherDeluxe")
-        directory "/home/deploy/FeedFetcherDeluxe" do
-          owner "deploy"
-          group "deploy"
-          action :create
-          mode 0755
-        end        
-        execute "extract files" do
-          command "tar xzvf /data/#{app_name}/current/lib/feedfetcher.tar.gz -C /home/deploy" do
-            owner 'deploy'
-            group 'deploy'            
-          end
-        end
-
-      end
+#      unless File.exists?("/home/deploy/FeedFetcherDeluxe")
+#        directory "/home/deploy/FeedFetcherDeluxe" do
+#          owner "deploy"
+#          group "deploy"
+#          action :create
+#          mode 0755
+#        end        
+#        execute "extract files" do
+#          command "tar xzvf /data/#{app_name}/current/lib/feedfetcher.tar.gz -C /home/deploy" do
+#            owner 'deploy'
+#            group 'deploy'            
+#          end
+#        end
+#
+#      end
       if File.exists?("/home/deploy/FeedFetcherDeluxe/conf/feedfetcher.cfg")
         template "/home/deploy/FeedFetcherDeluxe/conf/feedfetcher.cfg" do
           source "feedfetcher.erb"
